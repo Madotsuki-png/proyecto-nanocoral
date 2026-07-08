@@ -1,31 +1,30 @@
 import React from 'react';
 import { useCart } from './CartContext';
-import { useLanguage } from './LanguageContext'; // 1. Importa el hook de traducción
+import { useLanguage } from './LanguageContext';
 
 const CartView = () => {
   const { carrito } = useCart();
-  const { t } = useLanguage(); // 2. Extrae la función t
+  const { t } = useLanguage();
 
   return (
-    <div className="bg-neutral-900 min-h-screen p-10 text-white">
-      {/* 3. Usamos las nuevas traducciones */}
-      <h2 className="text-2xl font-bold text-teal-400 mb-6">
+    <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', padding: '40px', color: 'var(--text-primary)', transition: 'all 0.3s ease' }}>
+      <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#14b8a6', marginBottom: '24px' }}>
         {t('tituloCarrito')} ({carrito.length} {t('articulos')})
       </h2>
       
       {carrito.length === 0 ? (
-        <p className="text-neutral-500">{t('carritoVacio')}</p>
+        <p style={{ color: 'var(--text-secondary)' }}>{t('carritoVacio')}</p>
       ) : (
-        <div className="space-y-4">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {carrito.map((item, index) => (
-            <div key={index} className="flex items-center justify-between border-b border-neutral-800 pb-4">
+            <div key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: `1px solid var(--border-color)`, paddingBottom: '16px' }}>
               <img 
                 src={`http://localhost:5000/images/${item.imagen_url}`} 
                 alt={item.nombre} 
-                className="w-16 h-16 object-cover rounded" 
+                style={{ width: '64px', height: '64px', objectFit: 'cover', borderRadius: '4px' }} 
               />
-              <p className="flex-1 ml-4">{item.nombre}</p>
-              <p className="text-emerald-400 font-bold">${item.precio} MXN</p>
+              <p style={{ flex: 1, marginLeft: '16px', color: 'var(--text-primary)' }}>{item.nombre}</p>
+              <p style={{ color: '#10b981', fontWeight: 'bold' }}>${item.precio} MXN</p>
             </div>
           ))}
         </div>

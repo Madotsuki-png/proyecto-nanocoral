@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useLanguage } from './LanguageContext'; // Importar el hook
+import { useLanguage } from './LanguageContext';
 
 export default function ProductDetail() {
-  const { t } = useLanguage(); // Extraer t
+  const { t } = useLanguage();
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
   const [relacionados, setRelacionados] = useState([]);
@@ -25,44 +25,44 @@ export default function ProductDetail() {
       .catch((err) => { console.error(err); setLoading(false); });
   }, [id]);
 
-  if (loading) return <div className="text-center py-20 text-neutral-500 text-xs">{t('cargandoFicha')}</div>;
-  if (!producto) return <div className="text-center py-20 text-xs text-red-400">{t('prodNoEncontrado')}</div>;
+  if (loading) return <div style={{ textAlign: 'center', paddingTop: '80px', color: 'var(--text-secondary)', fontSize: '12px', backgroundColor: 'var(--bg-primary)', minHeight: '100vh' }}>{t('cargandoFicha')}</div>;
+  if (!producto) return <div style={{ textAlign: 'center', paddingTop: '80px', fontSize: '12px', color: '#ef4444', backgroundColor: 'var(--bg-primary)', minHeight: '100vh' }}>{t('prodNoEncontrado')}</div>;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
-      <div className="grid md:grid-cols-2 gap-10 items-center bg-neutral-950 p-6 rounded-xl border border-neutral-800 mb-12">
-        <img src={`http://localhost:5000/images/${producto.imagen_url}`} alt={producto.nombre} />
+    <div style={{ maxWidth: '56rem', margin: '0 auto', padding: '16px', backgroundColor: 'var(--bg-primary)', minHeight: '100vh', color: 'var(--text-primary)', transition: 'all 0.3s ease' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center', backgroundColor: 'var(--bg-secondary)', padding: '24px', borderRadius: '12px', border: `1px solid var(--border-color)`, marginBottom: '48px' }}>
+        <img src={`http://localhost:5000/images/${producto.imagen_url}`} alt={producto.nombre} style={{ width: '100%', borderRadius: '8px' }} />
 
         <div>
-          <span className="text-[10px] text-teal-400 font-mono tracking-widest uppercase">{t('stockStatus')}</span>
-          <h1 className="text-2xl font-bold mt-1 text-white">{producto.nombre}</h1>
-          <p className="text-xl font-bold text-teal-400 mt-4">${producto.precio} MXN</p>
+          <span style={{ fontSize: '10px', color: 'var(--accent-color)', fontFamily: 'monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>{t('stockStatus')}</span>
+          <h1 style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '4px', color: 'var(--text-primary)' }}>{producto.nombre}</h1>
+          <p style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--accent-color)', marginTop: '16px' }}>${producto.precio} MXN</p>
           
-          <p className="text-xs text-neutral-400 mt-4 leading-relaxed">
+          <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '16px', lineHeight: '1.625' }}>
             {producto.descripcion || t('descDefault')}
           </p>
 
-          <button className="mt-6 w-full bg-white text-neutral-950 font-bold py-2.5 rounded text-xs hover:bg-teal-500 hover:text-neutral-950 transition">
+          <button style={{ marginTop: '24px', width: '100%', backgroundColor: 'var(--accent-color)', color: 'var(--button-text)', fontWeight: 'bold', padding: '12px', borderRadius: '4px', fontSize: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--accent-light)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'var(--accent-color)'; }}>
             {t('btnCarrito')}
           </button>
         </div>
       </div>
 
-      <section className="border-t border-neutral-800 pt-8">
-        <h2 className="text-sm font-bold mb-4 uppercase tracking-wider text-neutral-400">{t('tituloRelacionados')}</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <section style={{ borderTop: `1px solid var(--border-color)`, paddingTop: '32px' }}>
+        <h2 style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-secondary)' }}>{t('tituloRelacionados')}</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px' }}>
           {relacionados.map((item) => (
-            <div key={item.id} className="bg-neutral-950 border border-neutral-800 rounded p-3 flex flex-col justify-between">
+            <div key={item.id} style={{ backgroundColor: 'var(--bg-secondary)', border: `1px solid var(--border-color)`, borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'all 0.3s ease' }}>
               <img 
                 src={`http://localhost:5000/images/${item.imagen_url}`} 
                 alt={item.nombre} 
-                className="w-full h-24 object-cover rounded mb-2"
+                style={{ width: '100%', height: '96px', objectFit: 'cover', borderRadius: '4px', marginBottom: '8px' }}
               />
               <div>
-                <h3 className="text-xs font-semibold text-neutral-300 truncate">{item.nombre}</h3>
-                <p className="text-teal-400 font-bold text-xs mt-1">${item.price || item.precio} MXN</p>
+                <h3 style={{ fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.nombre}</h3>
+                <p style={{ color: 'var(--accent-color)', fontWeight: 'bold', fontSize: '12px', marginTop: '4px' }}>${item.price || item.precio} MXN</p>
               </div>
-              <Link to={`/product/${item.id}`} className="mt-2 block w-full text-center bg-neutral-900 border border-neutral-800 text-[11px] py-1 rounded text-neutral-400 hover:bg-neutral-800 transition">
+              <Link to={`/product/${item.id}`} style={{ marginTop: '8px', display: 'block', textAlign: 'center', backgroundColor: 'var(--bg-tertiary)', border: `1px solid var(--border-color)`, fontSize: '11px', paddingTop: '8px', paddingBottom: '8px', borderRadius: '4px', textDecoration: 'none', color: 'var(--text-secondary)', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--border-color)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'var(--bg-tertiary)'; }}>
                 {t('btnVerArticulo')}
               </Link>
             </div>

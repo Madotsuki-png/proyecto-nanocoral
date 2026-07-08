@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useLanguage } from './LanguageContext'; // 1. Importa el hook
+import { useLanguage } from './LanguageContext';
 
 export default function Login() {
-  const { t } = useLanguage(); // 2. Extrae la función t
+  const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,7 +15,7 @@ export default function Login() {
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('role', res.data.rol);
       
-      alert(t('alertaBienvenido')); // Traducción en alerta
+      alert(t('alertaBienvenido'));
 
       if (res.data.rol === 'ADMIN') {
         window.location.href = '/admin';
@@ -24,27 +24,27 @@ export default function Login() {
       }
       
     } catch (err) {
-      alert(t('alertaError')); // Traducción en alerta
+      alert(t('alertaError'));
     }
   };
 
   return (
-    <div className="p-20 text-white flex justify-center">
-      <form onSubmit={handleLogin} className="bg-neutral-800 p-8 rounded-lg w-80 flex flex-col gap-4">
-        <h2 className="text-xl font-bold">{t('tituloLogin')}</h2>
+    <div style={{ padding: '80px 16px', color: 'var(--text-primary)', display: 'flex', justifyContent: 'center', backgroundColor: 'var(--bg-primary)', minHeight: '100vh', transition: 'all 0.3s ease' }}>
+      <form onSubmit={handleLogin} style={{ backgroundColor: 'var(--bg-secondary)', padding: '32px', borderRadius: '8px', width: '320px', display: 'flex', flexDirection: 'column', gap: '16px', border: `1px solid var(--border-color)` }}>
+        <h2 style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--text-primary)' }}>{t('tituloLogin')}</h2>
         <input 
           type="email" 
           placeholder={t('placeholderEmail')} 
-          className="p-2 text-white rounded bg-neutral-700" // Añadí un bg para mejor contraste
+          style={{ padding: '8px', color: 'var(--text-primary)', borderRadius: '4px', backgroundColor: 'var(--bg-tertiary)', border: `1px solid var(--border-color)`, fontSize: '14px' }}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input 
           type="password" 
           placeholder={t('placeholderPass')} 
-          className="p-2 text-white rounded bg-neutral-700"
+          style={{ padding: '8px', color: 'var(--text-primary)', borderRadius: '4px', backgroundColor: 'var(--bg-tertiary)', border: `1px solid var(--border-color)`, fontSize: '14px' }}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit" className="bg-teal-600 p-2 rounded font-bold">
+        <button type="submit" style={{ backgroundColor: 'var(--accent-color)', padding: '8px', borderRadius: '4px', fontWeight: 'bold', color: 'var(--button-text)', fontSize: '14px', border: 'none', cursor: 'pointer', transition: 'background-color 0.2s' }} onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--accent-light)'} onMouseLeave={(e) => e.target.style.backgroundColor = 'var(--accent-color)'}>
           {t('btnEntrar')}
         </button>
       </form>
