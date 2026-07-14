@@ -53,9 +53,9 @@ oracledb.fetchAsString = [oracledb.CLOB];
 oracledb.autoCommit = true;
 
 const dbConfig = {
-  user: 'Rafael',
-  password: '123456789',
-  connectString: '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=xe)))'
+  user: process.env.DB_USER || 'Rafael',
+  password: process.env.DB_PASSWORD || '123456789',
+  connectString: `(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=${process.env.DB_HOST || 'localhost'})(PORT=${process.env.DB_PORT || 1521}))(CONNECT_DATA=(SID=${process.env.DB_SID || 'xe'})))`
 };
 
 // 1. Ruta para obtener todos los productos
@@ -362,4 +362,9 @@ app.get('/api/ordenes/cliente/:usuario_id', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Servidor Backend corriendo en el puerto ${PORT}`));
+
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', message: 'Backend is running' });
+});
+
+app.listen(PORT, '0.0.0.0', () => console.log(`✅ Servidor Backend corriendo en el puerto ${PORT}`));
