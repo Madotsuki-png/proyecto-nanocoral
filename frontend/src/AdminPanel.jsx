@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useLanguage } from './LanguageContext';
 import ColorThemeSelector from './ColorThemeSelector';
 import OrdersPanel from './OrdersPanel';
+import API_URL from './api.config';
 
 export default function AdminPanel() {
   const { t } = useLanguage();
@@ -46,7 +47,7 @@ export default function AdminPanel() {
       formData.append('categoria_id', producto.categoria_id);
       formData.append('imagen', imageFile);
 
-      const response = await axios.post('http://localhost:5000/api/productos', formData, {
+      const response = await axios.post(`${API_URL}/api/productos`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

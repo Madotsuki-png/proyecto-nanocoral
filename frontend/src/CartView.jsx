@@ -4,6 +4,7 @@ import { useLanguage } from './LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import ColorThemeSelector from './ColorThemeSelector';
 import { Trash2 } from 'lucide-react';
+import API_URL from './api.config';
 
 const CartView = () => {
   const { carrito, setCarrito } = useCart();
@@ -47,7 +48,7 @@ const CartView = () => {
                 {carrito.map((item, index) => (
                   <div key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: 'var(--bg-secondary)', padding: '16px', borderRadius: '8px', border: `1px solid var(--border-color)` }}>
                     <img 
-                      src={`http://localhost:5000/images/${item.imagen_url}`} 
+                      src={`${API_URL}/images/${item.imagen_url}`} 
                       alt={item.nombre} 
                       style={{ width: '64px', height: '64px', objectFit: 'cover', borderRadius: '4px' }} 
                     />
@@ -169,7 +170,7 @@ function CheckoutForm({ carrito, total, onBack }) {
         return;
       }
 
-      const response = await fetch('http://localhost:5000/api/ordenes', {
+      const response = await fetch(`${API_URL}/api/ordenes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

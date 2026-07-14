@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLanguage } from './LanguageContext';
 import ColorThemeSelector from './ColorThemeSelector';
 import { Star, CheckCircle, Truck, Clock, AlertCircle, RefreshCw } from 'lucide-react';
+import API_URL from './api.config';
 
 export default function MyOrders() {
   const { t } = useLanguage();
@@ -40,9 +41,8 @@ export default function MyOrders() {
         return;
       }
 
-      // Agregar timestamp para evitar caché del navegador
       const timestamp = new Date().getTime();
-      const response = await fetch(`http://localhost:5000/api/ordenes/cliente/${usuario_id}?t=${timestamp}`, {
+      const response = await fetch(`${API_URL}/api/ordenes/cliente/${usuario_id}?t=${timestamp}`, {
         method: 'GET',
         headers: {
           'Cache-Control': 'no-cache',
@@ -72,7 +72,7 @@ export default function MyOrders() {
   const handleConfirmarRecepcion = async (ordenId) => {
     try {
       console.log('📍 Confirmando recepción de orden:', ordenId);
-      const response = await fetch(`http://localhost:5000/api/ordenes/${ordenId}/confirmar-recepcion`, {
+      const response = await fetch(`${API_URL}/api/ordenes/${ordenId}/confirmar-recepcion`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' }
       });
@@ -98,7 +98,7 @@ export default function MyOrders() {
     try {
       const userName = localStorage.getItem('userName');
       console.log('📝 Enviando reseña para orden:', ordenId);
-      const response = await fetch('http://localhost:5000/api/resenas', {
+      const response = await fetch(`${API_URL}/api/resenas`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

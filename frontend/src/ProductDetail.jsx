@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useLanguage } from './LanguageContext';
+import API_URL from './api.config';
 
 export default function ProductDetail() {
   const { t } = useLanguage();
@@ -11,11 +12,11 @@ export default function ProductDetail() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/api/productos/${id}`)
+    fetch(`${API_URL}/api/productos/${id}`)
       .then((res) => { if (!res.ok) throw new Error('Error'); return res.json(); })
       .then((data) => {
         setProducto(data);
-        return fetch(`http://localhost:5000/api/productos?categoria=${data.categoria_id}`);
+        return fetch(`${API_URL}/api/productos?categoria=${data.categoria_id}`);
       })
       .then((res) => res.json())
       .then((data) => {
@@ -31,7 +32,7 @@ export default function ProductDetail() {
   return (
     <div style={{ maxWidth: '56rem', margin: '0 auto', padding: '16px', backgroundColor: 'var(--bg-primary)', minHeight: '100vh', color: 'var(--text-primary)', transition: 'all 0.3s ease' }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center', backgroundColor: 'var(--bg-secondary)', padding: '24px', borderRadius: '12px', border: `1px solid var(--border-color)`, marginBottom: '48px' }}>
-        <img src={`http://localhost:5000/images/${producto.imagen_url}`} alt={producto.nombre} style={{ width: '100%', borderRadius: '8px' }} />
+        <img src={`${API_URL}/images/${producto.imagen_url}`} alt={producto.nombre} style={{ width: '100%', borderRadius: '8px' }} />
 
         <div>
           <span style={{ fontSize: '10px', color: 'var(--theme-color)', fontFamily: 'monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>{t('stockStatus')}</span>
@@ -54,7 +55,7 @@ export default function ProductDetail() {
           {relacionados.map((item) => (
             <div key={item.id} style={{ backgroundColor: 'var(--bg-secondary)', border: `1px solid var(--border-color)`, borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'all 0.3s ease' }}>
               <img 
-                src={`http://localhost:5000/images/${item.imagen_url}`} 
+                src={`${API_URL}/images/${item.imagen_url}`} 
                 alt={item.nombre} 
                 style={{ width: '100%', height: '96px', objectFit: 'cover', borderRadius: '4px', marginBottom: '8px' }}
               />

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from './CartContext';
 import { useLanguage } from './LanguageContext';
+import API_URL from './api.config';
 
 function Shop() {
   const { t } = useLanguage();
@@ -12,7 +13,7 @@ function Shop() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/productos')
+    axios.get(`${API_URL}/api/productos`)
       .then(response => {
         setProductos(response.data);
         setLoading(false);
@@ -53,7 +54,7 @@ function Shop() {
               <div>
                 <div style={{ height: '224px', backgroundColor: 'var(--bg-tertiary)', overflow: 'hidden', position: 'relative' }}>
                   <img 
-                    src={`http://localhost:5000/images/${producto.imagen_url}`} 
+                    src={`${API_URL}/images/${producto.imagen_url}`} 
                     alt={producto.nombre} 
                     onError={(e) => { e.target.src = '/images/placeholder.jpg'; }}
                     style={{ width: '100%', height: '224px', objectFit: 'cover' }}

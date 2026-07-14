@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLanguage } from './LanguageContext';
 import ColorThemeSelector from './ColorThemeSelector';
 import { CheckCircle, Truck, Clock } from 'lucide-react';
+import API_URL from './api.config';
 
 export default function OrdersPanel() {
   const { t } = useLanguage();
@@ -15,7 +16,7 @@ export default function OrdersPanel() {
 
   const fetchOrdenes = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/ordenes');
+      const response = await fetch(`${API_URL}/api/ordenes`);
       const data = await response.json();
       setOrdenes(data);
       setLoading(false);
@@ -27,7 +28,7 @@ export default function OrdersPanel() {
 
   const handleDespachar = async (ordenId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/ordenes/${ordenId}/despachar`, {
+      const response = await fetch(`${API_URL}/api/ordenes/${ordenId}/despachar`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' }
       });

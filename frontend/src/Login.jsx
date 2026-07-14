@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useLanguage } from './LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import ColorThemeSelector from './ColorThemeSelector';
+import API_URL from './api.config';
 
 export default function Login() {
   const { t } = useLanguage();
@@ -28,7 +29,7 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/login', {
+      const res = await axios.post(`${API_URL}/api/login`, {
         email: loginForm.email,
         password: loginForm.password
       });
@@ -56,7 +57,7 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/registro', {
+      const res = await axios.post(`${API_URL}/api/registro`, {
         nombre: registerForm.nombre,
         email: registerForm.email,
         password: registerForm.password,

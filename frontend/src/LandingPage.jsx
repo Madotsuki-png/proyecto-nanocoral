@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useLanguage } from './LanguageContext';
+import API_URL from './api.config';
 
 export default function LandingPage() {
   const { t } = useLanguage();
@@ -10,7 +11,7 @@ export default function LandingPage() {
   const miNumero = "525566783099";
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/resenas')
+    axios.get(`${API_URL}/api/resenas`)
       .then(response => {
         setResenas(response.data);
         setLoading(false);
