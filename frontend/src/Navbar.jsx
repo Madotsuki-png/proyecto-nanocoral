@@ -5,6 +5,7 @@ import { useLanguage } from './LanguageContext';
 import { useTheme } from './ThemeContext';
 import { Moon, Sun } from 'lucide-react';
 import ThemeToggleTest from './ThemeToggleTest';
+import ColorThemeSelector from './ColorThemeSelector';
 
 export default function Navbar() {
   const { cart } = useCart();
@@ -28,7 +29,9 @@ export default function Navbar() {
       position: 'sticky',
       top: 0,
       zIndex: 50,
-      transition: 'background-color 0.3s ease, border-color 0.3s ease'
+      transition: 'background-color 0.3s ease, border-color 0.3s ease',
+      flexWrap: 'wrap',
+      gap: '16px'
     }}>
       <Link to="/" style={{
         fontSize: '18px',
@@ -48,9 +51,11 @@ export default function Navbar() {
         fontWeight: '500',
         letterSpacing: '0.05em',
         textTransform: 'uppercase',
-        alignItems: 'center'
+        alignItems: 'center',
+        flexWrap: 'wrap'
       }}>
         <ThemeToggleTest />
+        <ColorThemeSelector />
 
         <Link to="/" style={{
           color: 'var(--text-secondary)',
@@ -83,6 +88,19 @@ export default function Navbar() {
           onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}
           >
             {t('carrito')} ({cart ? cart.length : 0})
+          </Link>
+        )}
+
+        {rol === 'CLIENT' && (
+          <Link to="/mis-ordenes" style={{
+            color: 'var(--text-secondary)',
+            textDecoration: 'none',
+            transition: 'color 0.2s'
+          }}
+          onMouseEnter={(e) => e.target.style.color = 'var(--accent-light)'}
+          onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}
+          >
+            Mis Órdenes
           </Link>
         )}
 

@@ -29,7 +29,7 @@ function Shop() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--bg-primary)', color: 'var(--accent-color)', transition: 'all 0.3s ease' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--bg-primary)', color: 'var(--theme-color)', transition: 'all 0.3s ease' }}>
         <p style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.05em', animation: 'pulse 2s infinite' }}>{t('cargandoCatalogo')}</p>
       </div>
     );
@@ -38,18 +38,18 @@ function Shop() {
   return (
     <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', padding: '48px 24px', transition: 'all 0.3s ease' }}>
       <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
-        <h1 style={{ fontSize: '24px', fontWeight: 'bold', letterSpacing: '0.05em', color: 'var(--accent-color)', textTransform: 'uppercase', marginBottom: '32px', textAlign: 'center' }}>{t('tituloCatalogo')}</h1>
+        <h1 style={{ fontSize: '24px', fontWeight: 'bold', letterSpacing: '0.05em', color: 'var(--theme-color)', textTransform: 'uppercase', marginBottom: '32px', textAlign: 'center' }}>{t('tituloCatalogo')}</h1>
         
         <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginBottom: '40px', flexWrap: 'wrap' }}>
-          <button onClick={() => setFiltro('todos')} style={{ color: 'var(--text-secondary)', textTransform: 'uppercase', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.05em', transition: 'color 0.2s', cursor: 'pointer', background: 'none', border: 'none' }} onMouseEnter={(e) => e.target.style.color = 'var(--accent-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>{t('filtroTodos')}</button>
-          <button onClick={() => setFiltro(3)} style={{ color: 'var(--text-secondary)', textTransform: 'uppercase', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.05em', transition: 'color 0.2s', cursor: 'pointer', background: 'none', border: 'none' }} onMouseEnter={(e) => e.target.style.color = 'var(--accent-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>{t('filtroPeces')}</button>
-          <button onClick={() => setFiltro(1)} style={{ color: 'var(--text-secondary)', textTransform: 'uppercase', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.05em', transition: 'color 0.2s', cursor: 'pointer', background: 'none', border: 'none' }} onMouseEnter={(e) => e.target.style.color = 'var(--accent-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>{t('filtroCorales')}</button>
-          <button onClick={() => setFiltro(2)} style={{ color: 'var(--text-secondary)', textTransform: 'uppercase', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.05em', transition: 'color 0.2s', cursor: 'pointer', background: 'none', border: 'none' }} onMouseEnter={(e) => e.target.style.color = 'var(--accent-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>{t('filtroLamparas')}</button>
+          <button onClick={() => setFiltro('todos')} style={{ color: 'var(--text-secondary)', textTransform: 'uppercase', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.05em', transition: 'color 0.2s', cursor: 'pointer', background: 'none', border: 'none' }} onMouseEnter={(e) => e.target.style.color = 'var(--theme-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>{t('filtroTodos')}</button>
+          <button onClick={() => setFiltro(3)} style={{ color: 'var(--text-secondary)', textTransform: 'uppercase', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.05em', transition: 'color 0.2s', cursor: 'pointer', background: 'none', border: 'none' }} onMouseEnter={(e) => e.target.style.color = 'var(--theme-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>{t('filtroPeces')}</button>
+          <button onClick={() => setFiltro(1)} style={{ color: 'var(--text-secondary)', textTransform: 'uppercase', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.05em', transition: 'color 0.2s', cursor: 'pointer', background: 'none', border: 'none' }} onMouseEnter={(e) => e.target.style.color = 'var(--theme-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>{t('filtroCorales')}</button>
+          <button onClick={() => setFiltro(2)} style={{ color: 'var(--text-secondary)', textTransform: 'uppercase', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.05em', transition: 'color 0.2s', cursor: 'pointer', background: 'none', border: 'none' }} onMouseEnter={(e) => e.target.style.color = 'var(--theme-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>{t('filtroLamparas')}</button>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '32px' }}>
           {productosFiltrados.map((producto) => (
-            <div key={producto.id} style={{ backgroundColor: 'var(--bg-secondary)', border: `1px solid var(--border-color)`, borderRadius: '8px', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'all 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--accent-color)'} onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border-color)'}>
+            <div key={producto.id} style={{ backgroundColor: 'var(--bg-secondary)', border: `1px solid var(--border-color)`, borderRadius: '8px', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'all 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--theme-color)'} onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border-color)'}>
               <div>
                 <div style={{ height: '224px', backgroundColor: 'var(--bg-tertiary)', overflow: 'hidden', position: 'relative' }}>
                   <img 
@@ -65,22 +65,22 @@ function Shop() {
               </div>
               
               <div style={{ padding: '20px', paddingTop: 0, display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '16px', borderTop: `1px solid var(--border-color)`, paddingTop: '16px' }}>
-                <p style={{ fontSize: '14px', fontWeight: 'bold', color: 'var(--accent-color)' }}>${producto.precio} MXN</p>
+                <p style={{ fontSize: '14px', fontWeight: 'bold', color: 'var(--theme-color)' }}>${producto.precio} MXN</p>
                 
                 <div style={{ display: 'flex', gap: '8px' }}>
                   <Link 
                     to={`/product/${producto.id}`} 
                     style={{ flex: 1, textAlign: 'center', padding: '8px 16px', backgroundColor: 'var(--bg-tertiary)', border: `1px solid var(--border-color)`, color: 'var(--text-secondary)', fontSize: '10px', textTransform: 'uppercase', fontWeight: '600', borderRadius: '4px', textDecoration: 'none', transition: 'all 0.2s', cursor: 'pointer' }}
-                    onMouseEnter={(e) => { e.target.style.color = 'var(--accent-color)'; e.target.style.borderColor = 'var(--accent-color)'; }}
+                    onMouseEnter={(e) => { e.target.style.color = 'var(--theme-color)'; e.target.style.borderColor = 'var(--theme-color)'; }}
                     onMouseLeave={(e) => { e.target.style.color = 'var(--text-secondary)'; e.target.style.borderColor = 'var(--border-color)'; }}
                   >
                     {t('btnDetalles')}
                   </Link>
                   <button 
                     onClick={() => agregarAlCarrito(producto)}
-                    style={{ flex: 1, padding: '8px 16px', backgroundColor: 'transparent', border: `1px solid var(--accent-color)`, color: 'var(--accent-color)', fontSize: '10px', textTransform: 'uppercase', fontWeight: '600', borderRadius: '4px', cursor: 'pointer', transition: 'all 0.2s' }}
-                    onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--accent-color)'; e.target.style.color = 'var(--button-text)'; }}
-                    onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'var(--accent-color)'; }}
+                    style={{ flex: 1, padding: '8px 16px', backgroundColor: 'transparent', border: `1px solid var(--theme-color)`, color: 'var(--theme-color)', fontSize: '10px', textTransform: 'uppercase', fontWeight: '600', borderRadius: '4px', cursor: 'pointer', transition: 'all 0.2s' }}
+                    onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--theme-color)'; e.target.style.color = 'white'; }}
+                    onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'var(--theme-color)'; }}
                   >
                     {t('btnAgregar')}
                   </button>

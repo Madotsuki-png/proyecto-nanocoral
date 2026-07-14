@@ -6,12 +6,18 @@ import ProductDetail from './ProductDetail';
 import { CartProvider } from './CartContext';
 import CartView from './CartView';
 import AdminPanel from './AdminPanel';
+import MyOrders from './MyOrders';
 import Login from './Login';
 import Navbar from './Navbar';
 
 const RutaAdmin = ({ children }) => {
   const role = localStorage.getItem('role');
   return role === 'ADMIN' ? children : <Navigate to="/login" />;
+};
+
+const RutaCliente = ({ children }) => {
+  const role = localStorage.getItem('role');
+  return role === 'CLIENT' || role === 'ADMIN' ? children : <Navigate to="/login" />;
 };
 
 function App() {
@@ -27,6 +33,7 @@ function App() {
               <Route path="/shop" element={<Shop />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/cart" element={<CartView />} />
+              <Route path="/mis-ordenes" element={<RutaCliente><MyOrders /></RutaCliente>} />
               <Route path="/admin" element={<RutaAdmin><AdminPanel /></RutaAdmin>} />
               <Route path="/login" element={<Login />} />
             </Routes>

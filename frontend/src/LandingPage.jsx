@@ -32,7 +32,7 @@ export default function LandingPage() {
         <p style={{ color: 'var(--text-secondary)', marginTop: '16px', maxWidth: '28rem', lineHeight: '1.625' }}>
           {t('descripcionHero')}
         </p>
-        <Link to="/shop" style={{ marginTop: '32px', padding: '12px 24px', backgroundColor: 'var(--accent-color)', color: 'var(--button-text)', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px', borderRadius: '4px', textDecoration: 'none', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--accent-light)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'var(--accent-color)'; }}>
+        <Link to="/shop" style={{ marginTop: '32px', padding: '12px 24px', backgroundColor: 'var(--theme-color)', color: 'white', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px', borderRadius: '4px', textDecoration: 'none', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--theme-light)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'var(--theme-color)'; }}>
           {t('btnExplorar')}
         </Link>
       </section>
@@ -42,18 +42,18 @@ export default function LandingPage() {
         
         {/* Columna Izquierda: Textos */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
-          <section style={{ borderLeft: '4px solid var(--accent-color)', paddingLeft: '24px' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '8px', color: 'var(--accent-color)' }}>{t('tituloDiseno')}</h2>
+          <section style={{ borderLeft: `4px solid var(--theme-color)`, paddingLeft: '24px' }}>
+            <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '8px', color: 'var(--theme-color)' }}>{t('tituloDiseno')}</h2>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>{t('descDiseno')}</p>
-            <a href={`https://wa.me/${miNumero}?text=Hola, quiero info sobre diseño y montaje.`} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: 'var(--accent-color)', color: 'var(--button-text)', padding: '8px 24px', borderRadius: '4px', fontWeight: 'bold', textDecoration: 'none', display: 'inline-block', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--accent-light)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'var(--accent-color)'; }}>
+            <a href={`https://wa.me/${miNumero}?text=Hola, quiero info sobre diseño y montaje.`} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: 'var(--theme-color)', color: 'white', padding: '8px 24px', borderRadius: '4px', fontWeight: 'bold', textDecoration: 'none', display: 'inline-block', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--theme-light)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'var(--theme-color)'; }}>
               {t('btnContactar')}
             </a>
           </section>
 
-          <section style={{ borderLeft: '4px solid var(--accent-color)', paddingLeft: '24px' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '8px', color: 'var(--accent-color)' }}>{t('tituloMantenimiento')}</h2>
+          <section style={{ borderLeft: `4px solid var(--theme-color)`, paddingLeft: '24px' }}>
+            <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '8px', color: 'var(--theme-color)' }}>{t('tituloMantenimiento')}</h2>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>{t('descMantenimiento')}</p>
-            <a href={`https://wa.me/${miNumero}?text=Hola, quiero info sobre mantenimiento.`} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: 'var(--accent-color)', color: 'var(--button-text)', padding: '8px 24px', borderRadius: '4px', fontWeight: 'bold', textDecoration: 'none', display: 'inline-block', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--accent-light)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'var(--accent-color)'; }}>
+            <a href={`https://wa.me/${miNumero}?text=Hola, quiero info sobre mantenimiento.`} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: 'var(--theme-color)', color: 'white', padding: '8px 24px', borderRadius: '4px', fontWeight: 'bold', textDecoration: 'none', display: 'inline-block', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--theme-light)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'var(--theme-color)'; }}>
               {t('btnContactar')}
             </a>
           </section>
@@ -82,11 +82,11 @@ export default function LandingPage() {
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '32px' }}>
               {resenas.map((resena) => (
-                <div key={resena.id} style={{ backgroundColor: 'var(--bg-secondary)', border: `1px solid var(--border-color)`, padding: '24px', borderRadius: '8px', transition: 'all 0.3s ease' }}>
+                <div key={resena.id} style={{ backgroundColor: 'var(--bg-secondary)', border: `1px solid var(--theme-color)`, padding: '24px', borderRadius: '8px', transition: 'all 0.3s ease' }}>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '12px', fontStyle: 'italic' }}>"{resena.comentario}"</p>
                   <div style={{ marginTop: '24px', borderTop: `1px solid var(--border-color)`, paddingTop: '16px', display: 'flex', justifyContent: 'space-between' }}>
                     <span style={{ color: 'var(--text-primary)', fontSize: '12px', fontWeight: '500' }}>{resena.usuario}</span>
-                    <span style={{ color: '#fbbf24', fontSize: '12px' }}>{'★'.repeat(resena.calificacion)}</span>
+                    <span style={{ color: 'var(--theme-color)', fontSize: '12px' }}>{'★'.repeat(resena.calificacion)}</span>
                   </div>
                 </div>
               ))}

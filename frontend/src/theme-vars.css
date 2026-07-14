@@ -15,6 +15,11 @@
   --accent-text: #ffffff;
   --button-bg: #000000;
   --button-text: #ffffff;
+  
+  /* Colores del tema (gris por defecto - sin color) */
+  --theme-color: #4b5563;
+  --theme-light: #6b7280;
+  --theme-dark: #374151;
 }
 
 html.dark {
@@ -34,6 +39,27 @@ html.dark {
   --accent-text: #000000;
   --button-bg: #ffffff;
   --button-text: #000000;
+}
+
+/* Tema Verde */
+:root.theme-green {
+  --theme-color: #14b8a6;
+  --theme-light: #2dd4bf;
+  --theme-dark: #0d9488;
+}
+
+/* Tema Azul */
+:root.theme-blue {
+  --theme-color: #3b82f6;
+  --theme-light: #60a5fa;
+  --theme-dark: #1d4ed8;
+}
+
+/* Tema Morado */
+:root.theme-purple {
+  --theme-color: #a855f7;
+  --theme-light: #c084fc;
+  --theme-dark: #7e22ce;
 }
 
 body {

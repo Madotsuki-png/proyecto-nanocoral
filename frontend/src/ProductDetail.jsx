@@ -34,15 +34,15 @@ export default function ProductDetail() {
         <img src={`http://localhost:5000/images/${producto.imagen_url}`} alt={producto.nombre} style={{ width: '100%', borderRadius: '8px' }} />
 
         <div>
-          <span style={{ fontSize: '10px', color: 'var(--accent-color)', fontFamily: 'monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>{t('stockStatus')}</span>
+          <span style={{ fontSize: '10px', color: 'var(--theme-color)', fontFamily: 'monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>{t('stockStatus')}</span>
           <h1 style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '4px', color: 'var(--text-primary)' }}>{producto.nombre}</h1>
-          <p style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--accent-color)', marginTop: '16px' }}>${producto.precio} MXN</p>
+          <p style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--theme-color)', marginTop: '16px' }}>${producto.precio} MXN</p>
           
           <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '16px', lineHeight: '1.625' }}>
             {producto.descripcion || t('descDefault')}
           </p>
 
-          <button style={{ marginTop: '24px', width: '100%', backgroundColor: 'var(--accent-color)', color: 'var(--button-text)', fontWeight: 'bold', padding: '12px', borderRadius: '4px', fontSize: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--accent-light)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'var(--accent-color)'; }}>
+          <button style={{ marginTop: '24px', width: '100%', backgroundColor: 'var(--theme-color)', color: 'white', fontWeight: 'bold', padding: '12px', borderRadius: '4px', fontSize: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--theme-light)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'var(--theme-color)'; }}>
             {t('btnCarrito')}
           </button>
         </div>
@@ -60,9 +60,9 @@ export default function ProductDetail() {
               />
               <div>
                 <h3 style={{ fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.nombre}</h3>
-                <p style={{ color: 'var(--accent-color)', fontWeight: 'bold', fontSize: '12px', marginTop: '4px' }}>${item.price || item.precio} MXN</p>
+                <p style={{ color: 'var(--theme-color)', fontWeight: 'bold', fontSize: '12px', marginTop: '4px' }}>${item.price || item.precio} MXN</p>
               </div>
-              <Link to={`/product/${item.id}`} style={{ marginTop: '8px', display: 'block', textAlign: 'center', backgroundColor: 'var(--bg-tertiary)', border: `1px solid var(--border-color)`, fontSize: '11px', paddingTop: '8px', paddingBottom: '8px', borderRadius: '4px', textDecoration: 'none', color: 'var(--text-secondary)', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--border-color)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'var(--bg-tertiary)'; }}>
+              <Link to={`/product/${item.id}`} style={{ marginTop: '8px', display: 'block', textAlign: 'center', backgroundColor: 'var(--bg-tertiary)', border: `1px solid var(--border-color)`, fontSize: '11px', paddingTop: '8px', paddingBottom: '8px', borderRadius: '4px', textDecoration: 'none', color: 'var(--text-secondary)', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--theme-color)'; e.target.style.color = 'white'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'var(--bg-tertiary)'; e.target.style.color = 'var(--text-secondary)'; }}>
                 {t('btnVerArticulo')}
               </Link>
             </div>
