@@ -11,10 +11,5 @@ export default defineConfig({
   server: {
     port: 3000,
     host: '0.0.0.0'
-  },
-  define: {
-    'import.meta.env.VITE_API_URL': JSON.stringify(
-      process.env.VITE_API_URL || 'https://proyecto-nanocoral-production.up.railway.app'
-    )
   }
 })
