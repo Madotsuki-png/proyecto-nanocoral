@@ -366,7 +366,7 @@ app.get('/api/ordenes/cliente/:usuario_id', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', message: 'Backend is running' });
