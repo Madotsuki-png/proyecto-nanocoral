@@ -3,6 +3,12 @@ import { useParams, Link } from 'react-router-dom';
 import { useLanguage } from './LanguageContext';
 import API_URL from './api.config';
 
+const getImageUrl = (imagen_url) => {
+  if (!imagen_url) return '/corales-default.jpg';
+  if (imagen_url.startsWith('http')) return imagen_url; // URL de Cloudinary
+  return `/${imagen_url}`; // Nombre de archivo, sirve desde frontend/public
+};
+
 export default function ProductDetail() {
   const { t } = useLanguage();
   const { id } = useParams();
@@ -32,7 +38,7 @@ export default function ProductDetail() {
   return (
     <div style={{ maxWidth: '56rem', margin: '0 auto', padding: '16px', backgroundColor: 'var(--bg-primary)', minHeight: '100vh', color: 'var(--text-primary)', transition: 'all 0.3s ease' }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center', backgroundColor: 'var(--bg-secondary)', padding: '24px', borderRadius: '12px', border: `1px solid var(--border-color)`, marginBottom: '48px' }}>
-        <img src={producto.imagen_url} alt={producto.nombre} style={{ width: '100%', borderRadius: '8px' }} onError={(e) => { e.target.src = '/corales-default.jpg'; }} />
+        <img src={getImageUrl(producto.imagen_url)} alt={producto.nombre} style={{ width: '100%', borderRadius: '8px' }} onError={(e) => { e.target.src = '/corales-default.jpg'; }} />
 
         <div>
           <span style={{ fontSize: '10px', color: 'var(--theme-color)', fontFamily: 'monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>{t('stockStatus')}</span>
@@ -55,7 +61,7 @@ export default function ProductDetail() {
           {relacionados.map((item) => (
             <div key={item.id} style={{ backgroundColor: 'var(--bg-secondary)', border: `1px solid var(--border-color)`, borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'all 0.3s ease' }}>
               <img 
-                src={item.imagen_url} 
+                src={getImageUrl(item.imagen_url)} 
                 alt={item.nombre} 
                 style={{ width: '100%', height: '96px', objectFit: 'cover', borderRadius: '4px', marginBottom: '8px' }}
                 onError={(e) => { e.target.src = '/corales-default.jpg'; }}

@@ -5,6 +5,12 @@ import { useCart } from './CartContext';
 import { useLanguage } from './LanguageContext';
 import API_URL from './api.config';
 
+const getImageUrl = (imagen_url) => {
+  if (!imagen_url) return '/corales-default.jpg';
+  if (imagen_url.startsWith('http')) return imagen_url; // URL de Cloudinary
+  return `/${imagen_url}`; // Nombre de archivo, sirve desde frontend/public
+};
+
 function Shop() {
   const { t } = useLanguage();
   const { agregarAlCarrito } = useCart();
@@ -54,7 +60,7 @@ function Shop() {
               <div>
                 <div style={{ height: '224px', backgroundColor: 'var(--bg-tertiary)', overflow: 'hidden', position: 'relative' }}>
   <img 
-    src={producto.imagen_url} 
+    src={getImageUrl(producto.imagen_url)} 
     alt={producto.nombre} 
     style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
     onError={(e) => { e.target.src = '/corales-default.jpg'; }}
