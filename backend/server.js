@@ -9,22 +9,9 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 
-app.use((req, res, next) => {
-  if (req.url.startsWith('/images')) {
-    console.log(`Intentando acceder a: ${path.join(__dirname, 'public', 'images', req.url.replace('/images', ''))}`);
-  }
-  next();
-});
-
 // Middlewares
 app.use(cors({
-  origin: [
-    'https://grand-alignment.up.railway.app',
-    'https://grand-alignment-production-3bbd.up.railway.app', // <-- ESTA ES LA QUE TE FALTA
-    'http://localhost:3000',
-    'http://localhost:5173'
-  ],
-  credentials: true
+  origin: '*'
 }));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb' }));
@@ -59,8 +46,25 @@ const upload = multer({
   }
 });
 
-// Servidor de imágenes
-app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
+// Servidor de imágenes - CON DEBUG
+app.use('/images', (req, res, next) => {
+  console.log(`📸 Request a /images${req.url}`);
+  express.static(path.join(__dirname, 'public', 'images'))(req, res, next);
+});
+
+// Debug endpoint
+app.get('/api/debug/images', (req, res) => {
+  try {
+    const files = fs.readdirSync(imagesDir);
+    res.json({ 
+      directorio: imagesDir,
+      archivos: files,
+      cantidad: files.length
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // Configuración de MySQL
 const dbConfig = {
@@ -68,7 +72,7 @@ const dbConfig = {
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || 'pqsTfYmiBOnhkfHtvXYnUzAOQsSzOzCF',
   database: process.env.DB_NAME || 'railway',
-  port: parseInt(process.env.DB_PORT) || 3306, // Convertimos a número
+  port: parseInt(process.env.DB_PORT) || 3306,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
