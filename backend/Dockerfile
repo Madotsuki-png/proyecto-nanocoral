@@ -2,15 +2,14 @@ FROM node:20-slim
 
 WORKDIR /app
 
-COPY package*.json ./
+# Copia los archivos del backend (ajustado)
+COPY backend/package*.json ./backend/
+RUN cd backend && npm install --omit=dev
 
-RUN npm install --omit=dev
-
+# Copia todo el contenido
 COPY . .
 
 EXPOSE 5000
 
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:5000/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})" || exit 1
-
-CMD ["node", "server.js"]
+# El comando de inicio debe ejecutar el server.js dentro de la carpeta backend
+CMD ["node", "backend/server.js"]
