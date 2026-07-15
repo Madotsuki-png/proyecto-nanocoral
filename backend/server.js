@@ -30,8 +30,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'nanocoral/productos',
-    resource_type: 'auto',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp']
+    resource_type: 'auto'
   }
 });
 
@@ -133,26 +132,38 @@ app.post('/api/productos', upload.single('imagen'), async (req, res) => {
   const { nombre, precio, descripcion, categoria_id } = req.body;
   let connection;
   try {
-    // Con Cloudinary, req.file.path es la URL completa
-    const imagen_url = req.file ? req.file.path : req.body.imagen_url;
+    console.log('📦 POST /api/productos recibido');
+    console.log('Datos:', { nombre, precio, descripcion, categoria_id });
+    console.log('Archivo:', req.file ? { filename: req.file.filename, path: req.file.path, size: req.file.size } : 'sin archivo');
 
-    if (!imagen_url) {
+    if (!nombre || !precio || !categoria_id) {
+      console.error('❌ Campos requeridos faltantes');
+      return res.status(400).json({ error: "Falta nombre, precio o categoría" });
+    }
+
+    if (!req.file) {
+      console.error('❌ Sin imagen');
       return res.status(400).json({ error: "Se requiere una imagen" });
     }
+
+    const imagen_url = req.file.path;
+    console.log('✅ URL de Cloudinary:', imagen_url);
 
     connection = await pool.getConnection();
     const sql = `INSERT INTO PRODUCTOS (nombre, precio, descripcion, categoria_id, imagen_url) 
                  VALUES (?, ?, ?, ?, ?)`;
     
-    await connection.execute(sql, [nombre, precio, descripcion, categoria_id, imagen_url]);
+    console.log('💾 Insertando en BD...');
+    await connection.execute(sql, [nombre, precio, descripcion || '', categoria_id, imagen_url]);
     
+    console.log('✅ Producto insertado correctamente');
     return res.status(201).json({ 
       message: "Producto agregado correctamente",
       imagen_url: imagen_url
     });
   } catch (err) {
-    console.error("Error al insertar producto:", err);
-    return res.status(500).json({ error: "Error al insertar producto en la base de datos" });
+    console.error("❌ Error:", err.message);
+    return res.status(500).json({ error: err.message || "Error al insertar producto" });
   } finally {
     if (connection) await connection.release();
   }
@@ -241,7 +252,6 @@ app.post('/api/ordenes', async (req, res) => {
 
     connection = await pool.getConnection();
     
-    // Insertar la orden (MySQL genera automáticamente el ID con AUTO_INCREMENT)
     const ordenSql = `INSERT INTO ORDENES (usuario_id, total, estado, nombre_cliente, email_cliente, telefono, direccion, ciudad, estado_postal, numero_tarjeta, fecha_orden) 
                       VALUES (?, ?, 'PENDIENTE', ?, ?, ?, ?, ?, ?, ?, NOW())`;
     
@@ -249,9 +259,7 @@ app.post('/api/ordenes', async (req, res) => {
     const orden_id = orderResult.insertId;
 
     console.log('ID de orden generado:', orden_id);
-    console.log('Orden insertada exitosamente');
 
-    // Insertar detalles de la orden
     for (const producto of productos) {
       const detalleSql = `INSERT INTO ORDEN_DETALLES (orden_id, producto_id, cantidad, precio_unitario) 
                           VALUES (?, ?, ?, ?)`;
