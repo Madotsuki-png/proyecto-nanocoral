@@ -13,6 +13,7 @@ const app = express();
 app.use(cors({
   origin: [
     'https://grand-alignment.up.railway.app',
+    'https://grand-alignment-production-3bbd.up.railway.app', // <-- ESTA ES LA QUE TE FALTA
     'http://localhost:3000',
     'http://localhost:5173'
   ],
