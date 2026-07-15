@@ -53,13 +53,12 @@ function Shop() {
             <div key={producto.id} style={{ backgroundColor: 'var(--bg-secondary)', border: `1px solid var(--border-color)`, borderRadius: '8px', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'all 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--theme-color)'} onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border-color)'}>
               <div>
                 <div style={{ height: '224px', backgroundColor: 'var(--bg-tertiary)', overflow: 'hidden', position: 'relative' }}>
-                  <img 
-                    src={`${API_URL}/images/${producto.imagen_url}`} 
-                    alt={producto.nombre} 
-                    onError={(e) => { e.target.src = `${API_URL}/images/placeholder.jpg`; }}
-                    style={{ width: '100%', height: '224px', objectFit: 'cover' }}
-                  />
-                </div>
+  <img 
+    src={`${API_URL}/images/${producto.imagen_url}`} 
+    alt={producto.nombre} 
+    style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+  />
+</div>
                 <div style={{ padding: '20px' }}>
                   <h2 style={{ fontSize: '14px', fontWeight: '600', letterSpacing: '0.05em', color: 'var(--text-primary)', textTransform: 'uppercase' }}>{producto.nombre}</h2>
                 </div>
