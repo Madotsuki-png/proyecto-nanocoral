@@ -1,0 +1,8 @@
+{
+  "builder": "nixpacks",
+  "buildCommand": "npm install --omit=dev",
+  "startCommand": "node server.js",
+  "volumes": [
+    "/app/public/images"
+  ]
+}
