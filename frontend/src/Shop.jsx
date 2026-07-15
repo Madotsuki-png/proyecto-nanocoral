@@ -56,7 +56,7 @@ function Shop() {
                   <img 
                     src={`${API_URL}/images/${producto.imagen_url}`} 
                     alt={producto.nombre} 
-                    onError={(e) => { e.target.src = '/images/placeholder.jpg'; }}
+                    onError={(e) => { e.target.src = `${API_URL}/images/placeholder.jpg`; }}
                     style={{ width: '100%', height: '224px', objectFit: 'cover' }}
                   />
                 </div>

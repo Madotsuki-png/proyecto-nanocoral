@@ -53,7 +53,7 @@ const upload = multer({
 });
 
 // Servidor de imágenes
-app.use('/images', express.static('public/images'));
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 // Configuración de MySQL
 const dbConfig = {
