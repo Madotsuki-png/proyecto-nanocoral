@@ -54,7 +54,7 @@ function Shop() {
               <div>
                 <div style={{ height: '224px', backgroundColor: 'var(--bg-tertiary)', overflow: 'hidden', position: 'relative' }}>
   <img 
-    src={`${API_URL}/images/${producto.imagen_url}`} 
+    src={`/${producto.imagen_url}`} 
     alt={producto.nombre} 
     style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
   />
