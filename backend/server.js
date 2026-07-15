@@ -2,12 +2,21 @@ const express = require('express');
 const mysql = require('mysql2/promise');
 const cors = require('cors');
 const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 const app = express();
+
+// Configurar Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 // Middlewares
 app.use(cors({
@@ -16,20 +25,13 @@ app.use(cors({
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb' }));
 
-// Crear carpeta de imágenes si no existe
-const imagesDir = path.join(__dirname, 'public/images');
-if (!fs.existsSync(imagesDir)) {
-  fs.mkdirSync(imagesDir, { recursive: true });
-}
-
-// Configurar multer para la carga de imágenes
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, imagesDir);
-  },
-  filename: (req, file, cb) => {
-    const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${path.extname(file.originalname)}`;
-    cb(null, uniqueName);
+// Configurar multer con Cloudinary storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'nanocoral/productos',
+    resource_type: 'auto',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp']
   }
 });
 
@@ -46,24 +48,13 @@ const upload = multer({
   }
 });
 
-// Servidor de imágenes - CON DEBUG
-app.use('/images', (req, res, next) => {
-  console.log(`📸 Request a /images${req.url}`);
-  express.static(path.join(__dirname, 'public', 'images'))(req, res, next);
-});
-
 // Debug endpoint
 app.get('/api/debug/images', (req, res) => {
-  try {
-    const files = fs.readdirSync(imagesDir);
-    res.json({ 
-      directorio: imagesDir,
-      archivos: files,
-      cantidad: files.length
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  res.json({ 
+    storage: 'Cloudinary',
+    folder: 'nanocoral/productos',
+    status: 'Configurado correctamente'
+  });
 });
 
 // Configuración de MySQL
@@ -142,7 +133,8 @@ app.post('/api/productos', upload.single('imagen'), async (req, res) => {
   const { nombre, precio, descripcion, categoria_id } = req.body;
   let connection;
   try {
-    const imagen_url = req.file ? req.file.filename : req.body.imagen_url;
+    // Con Cloudinary, req.file.path es la URL completa
+    const imagen_url = req.file ? req.file.path : req.body.imagen_url;
 
     if (!imagen_url) {
       return res.status(400).json({ error: "Se requiere una imagen" });
@@ -159,11 +151,6 @@ app.post('/api/productos', upload.single('imagen'), async (req, res) => {
       imagen_url: imagen_url
     });
   } catch (err) {
-    if (req.file) {
-      fs.unlink(req.file.path, (unlinkErr) => {
-        if (unlinkErr) console.error("Error al eliminar archivo:", unlinkErr);
-      });
-    }
     console.error("Error al insertar producto:", err);
     return res.status(500).json({ error: "Error al insertar producto en la base de datos" });
   } finally {

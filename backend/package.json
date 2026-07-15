@@ -7,7 +7,12 @@
     "start": "node server.js",
     "dev": "node server.js"
   },
-  "keywords": ["ecommerce", "express", "oracle", "api"],
+  "keywords": [
+    "ecommerce",
+    "express",
+    "oracle",
+    "api"
+  ],
   "author": "NanoCoral Team",
   "license": "MIT",
   "repository": {
@@ -19,11 +24,13 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
+    "cloudinary": "^1.41.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0",
     "mysql2": "^3.6.5"
   }
 }
