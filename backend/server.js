@@ -56,9 +56,9 @@ app.use('/images', express.static('public/images'));
 
 // Configuración de MySQL
 const dbConfig = {
-  host: process.env.DB_HOST || 'localhost',
+  host: process.env.DB_HOST || 'mysql.railway.internal',
   user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
+  password: process.env.DB_PASSWORD || 'pqsTfYmiBOnhkfHtvXYnUzAOQsSzOzCF',
   database: process.env.DB_NAME || 'railway',
   port: parseInt(process.env.DB_PORT) || 3306, // Convertimos a número
   waitForConnections: true,
