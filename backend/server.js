@@ -9,6 +9,13 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 
+app.use((req, res, next) => {
+  if (req.url.startsWith('/images')) {
+    console.log(`Intentando acceder a: ${path.join(__dirname, 'public', 'images', req.url.replace('/images', ''))}`);
+  }
+  next();
+});
+
 // Middlewares
 app.use(cors({
   origin: [
